@@ -43,7 +43,7 @@
       min-height: 100vh;
       display: flex;
       justify-content: center;
-      padding: 16px 12px;
+      padding: 14px 12px;
     }
 
     #app {
@@ -54,17 +54,16 @@
       gap: 12px;
     }
 
-    /* Шапка приложения */
+    /* Шапка */
     .header {
       text-align: center;
-      padding: 4px 0 2px 0;
+      padding: 2px 0 4px;
     }
 
     .header h1 {
       font-size: 20px;
       font-weight: 700;
       color: var(--text-main);
-      letter-spacing: -0.2px;
     }
 
     .header p {
@@ -73,48 +72,48 @@
       margin-top: 2px;
     }
 
-    /* Навигация по блокам */
+    /* Меню блоков: ровно 3 ряда по 2 кнопки */
     .block-selector {
-      display: flex;
-      gap: 6px;
-      overflow-x: auto;
-      padding-bottom: 4px;
-      scrollbar-width: none;
+      display: grid !important;
+      grid-template-columns: 1fr 1fr !important;
+      gap: 8px !important;
+      width: 100% !important;
     }
-    .block-selector::-webkit-scrollbar { display: none; }
 
     .pill-btn {
-      flex: 0 0 auto;
-      padding: 7px 13px;
-      border-radius: 20px;
-      border: 1px solid var(--border);
-      background: var(--card-bg);
-      color: var(--text-sub);
-      font-size: 13px;
-      font-weight: 500;
-      cursor: pointer;
-      outline: none;
+      display: block !important;
+      width: 100% !important;
+      padding: 10px 6px !important;
+      border-radius: 10px !important;
+      border: 1px solid var(--border) !important;
+      background-color: var(--card-bg) !important;
+      color: var(--text-main) !important;
+      font-size: 14px !important;
+      font-weight: 600 !important;
+      cursor: pointer !important;
+      outline: none !important;
+      text-align: center !important;
       transition: all 0.15s ease;
     }
 
     .pill-btn:hover {
-      border-color: var(--text-muted);
+      border-color: var(--text-muted) !important;
     }
 
     .pill-btn.active {
-      background: var(--text-main);
-      color: var(--bg-page);
-      border-color: var(--text-main);
+      background-color: var(--text-main) !important;
+      color: var(--bg-page) !important;
+      border-color: var(--text-main) !important;
     }
 
     .pill-btn.pill-errors {
-      border-color: var(--error-border);
-      color: var(--error-text);
+      border-color: var(--error-border) !important;
+      color: var(--error-text) !important;
     }
 
     .pill-btn.pill-errors.active {
-      background: var(--error-border);
-      color: #fff;
+      background-color: var(--error-border) !important;
+      color: #ffffff !important;
     }
 
     /* Прогресс-бар */
@@ -133,12 +132,12 @@
       transition: width 0.25s ease;
     }
 
-    /* Основная карточка */
+    /* Карточка вопроса */
     .card {
       background: var(--card-bg);
       border: 1px solid var(--border-light);
       border-radius: 14px;
-      padding: 22px 16px;
+      padding: 20px 16px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -170,7 +169,7 @@
       font-size: 34px;
       font-weight: 600;
       color: var(--text-main);
-      margin-top: 4px;
+      margin-top: 2px;
     }
 
     .kana {
@@ -190,7 +189,7 @@
       font-size: 26px;
       font-weight: 600;
       color: var(--accent);
-      margin-top: 18px;
+      margin-top: 16px;
       letter-spacing: 2px;
       background: var(--bg-page);
       padding: 6px 20px;
@@ -198,7 +197,7 @@
       border: 1px dashed var(--border);
     }
 
-    /* Сетка 6 кнопок ответов */
+    /* 6 кнопок ответов */
     .buttons-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -227,7 +226,7 @@
       transform: scale(0.96);
     }
 
-    /* Блок ответа */
+    /* Блок пояснения */
     .feedback-box {
       background: var(--card-bg);
       border-radius: 14px;
@@ -286,7 +285,7 @@
     }
     .btn-action:hover { background: var(--accent-hover); }
 
-    /* Экран завершения */
+    /* Окончание блока */
     .dialog-view {
       background: var(--card-bg);
       border: 1px solid var(--border-light);
@@ -311,18 +310,25 @@
     <p>Японские глаголы N5</p>
   </div>
 
-  <!-- Меню выбора блоков -->
-  <div class="block-selector" id="blockSelector"></div>
+  <!-- Меню выбора блоков: 3 ряда по 2 кнопки -->
+  <div class="block-selector">
+    <button type="button" class="pill-btn active" id="btnBlock0" onclick="switchBlock(0)">Блок 1</button>
+    <button type="button" class="pill-btn" id="btnBlock1" onclick="switchBlock(1)">Блок 2</button>
+    <button type="button" class="pill-btn" id="btnBlock2" onclick="switchBlock(2)">Блок 3</button>
+    <button type="button" class="pill-btn" id="btnBlock3" onclick="switchBlock(3)">Блок 4</button>
+    <button type="button" class="pill-btn" id="btnBlock4" onclick="switchBlock(4)">Блок 5</button>
+    <button type="button" class="pill-btn pill-errors" id="btnBlock5" onclick="switchBlock(5)">Ошибки (0)</button>
+  </div>
 
   <!-- Прогресс -->
   <div class="progress-container">
     <div class="progress-bar" id="progressBar"></div>
   </div>
 
-  <!-- Игровая область -->
+  <!-- Игровая панель -->
   <div id="gamePanel" style="display: flex; flex-direction: column; gap: 12px;">
     <div class="card">
-      <button class="audio-btn" id="btnReplayAudio" title="Прослушать">
+      <button type="button" class="audio-btn" id="btnReplayAudio" title="Прослушать">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
           <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
@@ -334,17 +340,17 @@
       <div class="stem-display" id="qStem">飲＿＿</div>
     </div>
 
-    <!-- 6 кнопок ответов -->
+    <!-- 6 кнопок вариантов -->
     <div class="buttons-grid" id="choicesGrid">
-      <button class="choice-btn" data-end="て">て</button>
-      <button class="choice-btn" data-end="って">って</button>
-      <button class="choice-btn" data-end="んで">んで</button>
-      <button class="choice-btn" data-end="いて">いて</button>
-      <button class="choice-btn" data-end="いで">いで</button>
-      <button class="choice-btn" data-end="して">して</button>
+      <button type="button" class="choice-btn" data-end="て">て</button>
+      <button type="button" class="choice-btn" data-end="って">って</button>
+      <button type="button" class="choice-btn" data-end="んで">んで</button>
+      <button type="button" class="choice-btn" data-end="いて">いて</button>
+      <button type="button" class="choice-btn" data-end="いで">いで</button>
+      <button type="button" class="choice-btn" data-end="して">して</button>
     </div>
 
-    <!-- Блок пояснения/ответа -->
+    <!-- Пояснение ответа -->
     <div class="feedback-box" id="feedbackBox">
       <div class="fb-title">
         <span id="fbVerdict">Верно!</span>
@@ -352,7 +358,7 @@
       </div>
       <div class="fb-form" id="fbFullForm">飲んで</div>
       <div class="fb-rule" id="fbRule">1 спр.: む, ぶ, ぬ → んで</div>
-      <button class="btn-action" id="btnNextWord">Продолжить</button>
+      <button type="button" class="btn-action" id="btnNextWord">Продолжить</button>
     </div>
   </div>
 
@@ -360,18 +366,17 @@
   <div class="dialog-view" id="emptyScreen">
     <h2 id="emptyTitle">Блок завершён!</h2>
     <p id="emptyDesc">Все слова блока пройдены.</p>
-    <button class="btn-action" id="btnRestartBlock">Пройти ещё раз</button>
+    <button type="button" class="btn-action" id="btnRestartBlock">Пройти ещё раз</button>
   </div>
 </div>
 
 <script>
-// База глаголов с точным чтением в хирагане для озвучки (teKana)
 var verbsData = [
   { id:1, kanji:"会う", kana:"あう", mean:"встречаться", gr:1, stem:"会", end:"って", te:"会って", teKana:"あって", rule:"1 спр.: う, つ, る → って" },
   { id:2, kanji:"開く", kana:"あく", mean:"открываться", gr:1, stem:"開", end:"いて", te:"開いて", teKana:"あいて", rule:"1 спр.: く → いて" },
   { id:3, kanji:"開ける", kana:"あける", mean:"открывать", gr:2, stem:"開け", end:"て", te:"開けて", teKana:"あけて", rule:"2 спр.: る → て" },
   { id:4, kanji:"あげる", kana:"あげる", mean:"давать, дарить", gr:2, stem:"あげ", end:"て", te:"あげて", teKana:"あげて", rule:"2 спр.: る → て" },
-  { id:5, kanji:"遊ぶ", kana:"あそぶ", mean:"играть, развлекаться", gr:1, stem:"遊", end:"んで", te:"遊んで", teKana:"あそんで", rule:"1 спр.: ぶ, む, ぬ → んで" },
+  { id:5, kanji:"遊ぶ", kana:"あそぶ", mean:"играть, развлекаться", gr:1, stem:"遊", end:"んで", te:"遊んで", teKana:"あсоんで", rule:"1 спр.: ぶ, む, ぬ → んで" },
   { id:6, kanji:"浴びる", kana:"あびる", mean:"обливаться, принимать душ", gr:2, stem:"浴び", end:"て", te:"浴びて", teKana:"あびて", rule:"2 спр.: る → て" },
   { id:7, kanji:"洗う", kana:"あらう", mean:"мыть, умывать", gr:1, stem:"洗", end:"って", te:"洗って", teKana:"あらって", rule:"1 спр.: う, つ, る → って" },
   { id:8, kanji:"ある", kana:"ある", mean:"быть (о неодушевленном)", gr:1, stem:"あ", end:"って", te:"あって", teKana:"あって", rule:"1 спр.: う, つ, る → って" },
@@ -389,7 +394,7 @@ var verbsData = [
   { id:20, kanji:"送る", kana:"おくる", mean:"отправлять, провожать", gr:1, stem:"送", end:"って", te:"送って", teKana:"おくって", rule:"1 спр.: う, つ, る → って" },
   { id:21, kanji:"押す", kana:"おす", mean:"нажимать, толкать", gr:1, stem:"押", end:"して", te:"押して", teKana:"おして", rule:"1 спр.: す → して" },
   { id:22, kanji:"覚える", kana:"おぼえる", mean:"запоминать, помнить", gr:2, stem:"覚え", end:"て", te:"覚えて", teKana:"おぼえて", rule:"2 спр.: る → て" },
-  { id:23, kanji:"泳ぐ", kana:"およぐ", mean:"плавать", gr:1, stem:"泳", end:"いで", te:"泳いで", teKana:"およいで", rule:"1 спр.: ぐ → いで" },
+  { id:23, kanji:"泳ぐ", kana:"およぐ", mean:"плавать", gr:1, stem:"泳", end:"いで", te:"泳いで", teKana:"およいで", rule:"1 спр.: ぐ → いде" },
   { id:24, kanji:"降りる", kana:"おりる", mean:"спускаться, выходить из транспорта", gr:2, stem:"降り", end:"て", te:"降りて", teKana:"おりて", rule:"2 спр.: る → て" },
   { id:25, kanji:"終わる", kana:"おわる", mean:"заканчиваться", gr:1, stem:"終わ", end:"って", te:"終わって", teKana:"おわって", rule:"1 спр.: う, つ, る → って" },
   { id:26, kanji:"買い物する", kana:"かいものする", mean:"делать покупки", gr:3, stem:"買い物", end:"して", te:"買い物して", teKana:"かいものして", rule:"3 спр.: する → して" },
@@ -412,7 +417,7 @@ var verbsData = [
   { id:43, kanji:"答える", kana:"こたえる", mean:"отвечать", gr:2, stem:"答え", end:"て", te:"答えて", teKana:"こたえて", rule:"2 спр.: る → て" },
   { id:44, kanji:"コピーする", kana:"コピーする", mean:"ксерокопировать", gr:3, stem:"コピー", end:"して", te:"コピーして", teKana:"コピーして", rule:"3 спр.: する → して" },
   { id:45, kanji:"困る", kana:"こまる", mean:"испытывать затруднения", gr:1, stem:"困", end:"って", te:"困って", teKana:"こまって", rule:"1 спр.: う, つ, る → って" },
-  { id:46, kanji:"咲く", kana:"さく", mean:"цвести, расцветать", gr:1, stem:"咲", end:"いて", te:"咲いて", teKana:"さいで", rule:"1 спр.: く → いて" },
+  { id:46, kanji:"咲く", kana:"さく", mean:"цвести, расцветать", gr:1, stem:"咲", end:"いて", te:"咲いて", teKana:"さいて", rule:"1 спр.: く → いて" },
   { id:47, kanji:"差す", kana:"さす", mean:"раскрывать зонт", gr:1, stem:"差", end:"して", te:"差して", teKana:"さして", rule:"1 спр.: す → して" },
   { id:48, kanji:"散歩する", kana:"さんぽする", mean:"прогуливаться", gr:3, stem:"散歩", end:"して", te:"散歩して", teKana:"さんぽして", rule:"3 спр.: する → して" },
   { id:49, kanji:"死ぬ", kana:"しぬ", mean:"умирать", gr:1, stem:"死", end:"んで", te:"死んで", teKana:"しんで", rule:"1 спр.: ぬ, ぶ, む → んで" },
@@ -500,7 +505,7 @@ var currentList = [];
 var errorList = [];
 var isAnswered = false;
 
-// Озвучивание текста (используем хирагану для 100% точности чтения)
+// Озвучивание
 function speak(text) {
   try {
     if ('speechSynthesis' in window) {
@@ -523,26 +528,21 @@ function speak(text) {
   }
 }
 
-// Меню блоков вверху
+// Обновление стилей кнопок меню
 function updateNav() {
-  var container = document.getElementById('blockSelector');
-  container.innerHTML = '';
-  
-  for (var i = 0; i < 5; i++) {
-    var btn = document.createElement('button');
-    btn.className = 'pill-btn' + (currentBlock === i ? ' active' : '');
-    btn.textContent = (i * 25 + 1) + '–' + ((i + 1) * 25);
-    (function(index) {
-      btn.onclick = function() { switchBlock(index); };
-    })(i);
-    container.appendChild(btn);
+  for (var i = 0; i < 6; i++) {
+    var btn = document.getElementById('btnBlock' + i);
+    if (!btn) continue;
+    if (currentBlock === i) {
+      btn.classList.add('active');
+    } else {
+      btn.classList.remove('active');
+    }
   }
-
-  var errBtn = document.createElement('button');
-  errBtn.className = 'pill-btn pill-errors' + (currentBlock === 5 ? ' active' : '');
-  errBtn.textContent = 'Ошибки (' + errorList.length + ')';
-  errBtn.onclick = function() { switchBlock(5); };
-  container.appendChild(errBtn);
+  var errBtn = document.getElementById('btnBlock5');
+  if (errBtn) {
+    errBtn.textContent = 'Ошибки (' + errorList.length + ')';
+  }
 }
 
 function switchBlock(idx) {
@@ -581,7 +581,6 @@ function renderCard() {
   var progress = (currentIndex / currentList.length) * 100;
   document.getElementById('progressBar').style.width = progress + '%';
 
-  // Озвучиваем точную хирагану
   speak(item.kana);
 }
 
@@ -616,7 +615,6 @@ function handleAnswer(chosenEnd) {
   document.getElementById('fbFullForm').textContent = item.te;
   document.getElementById('fbRule').textContent = item.rule;
 
-  // Озвучиваем правильную て-форму
   speak(item.teKana);
   updateNav();
 }
@@ -643,7 +641,7 @@ function showEmpty() {
   }
 }
 
-// Привязка кнопок ответов
+// Нажатия на 6 вариантов ответов
 var choiceButtons = document.querySelectorAll('.choice-btn');
 choiceButtons.forEach(function(btn) {
   btn.onclick = function() {
@@ -666,7 +664,7 @@ document.getElementById('btnRestartBlock').onclick = function() {
   switchBlock(currentBlock);
 };
 
-// Запуск приложения
+// Запуск
 switchBlock(0);
 </script>
 </body>
