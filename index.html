@@ -60,6 +60,12 @@
     transform: scale(0.98);
   }
 
+  /* Выделение карточки слайд-шоу */
+  .game-card.featured {
+    border-color: #d97757;
+    background: #fffdfc;
+  }
+
   .game-info { display: flex; align-items: center; gap: 16px; }
   .game-icon {
     width: 44px;
@@ -98,73 +104,29 @@
 
   <div class="games-list">
     
-    <!-- 1. Антонимы -->
-    <a href="antonyms.html" class="game-card">
+    <!-- 1. Слайд-шоу N5 (Новая первая кнопка) -->
+    <a href="slideshow.html" class="game-card featured">
       <div class="game-info">
-        <div class="game-icon">⚖️</div>
+        <div class="game-icon">📺</div>
         <div class="game-text">
-          <h2>Антонимы</h2>
+          <h2>Слайд-шоу N5</h2>
+        </div>
+      </div>
+      <div class="play-btn">Смотреть →</div>
+    </a>
+
+    <!-- 2. Глаголяндия (Бывшая 8-я) -->
+    <a href="1ур.html" class="game-card">
+      <div class="game-info">
+        <div class="game-icon">🏰</div>
+        <div class="game-text">
+          <h2>Глаголяндия</h2>
         </div>
       </div>
       <div class="play-btn">Играть →</div>
     </a>
 
-    <!-- 2. Антонимы хирагана -->
-    <a href="antonyms_hiragana.html" class="game-card">
-      <div class="game-info">
-        <div class="game-icon">✍️</div>
-        <div class="game-text">
-          <h2>Антонимы хирагана</h2>
-        </div>
-      </div>
-      <div class="play-btn">Играть →</div>
-    </a>
-
-    <!-- 3. Квиз 1 -->
-    <a href="quiz1.html" class="game-card">
-      <div class="game-info">
-        <div class="game-icon">⛩️</div>
-        <div class="game-text">
-          <h2>Квиз 1</h2>
-        </div>
-      </div>
-      <div class="play-btn">Играть →</div>
-    </a>
-
-    <!-- 4. Квиз 2 -->
-    <a href="quiz2_with_images.html" class="game-card">
-      <div class="game-info">
-        <div class="game-icon">🌸</div>
-        <div class="game-text">
-          <h2>Квиз 2</h2>
-        </div>
-      </div>
-      <div class="play-btn">Играть →</div>
-    </a>
-
-    <!-- 5. Блоки 1 -->
-    <a href="blocks1.html" class="game-card">
-      <div class="game-info">
-        <div class="game-icon">🗳️</div>
-        <div class="game-text">
-          <h2>Блоки 1</h2>
-        </div>
-      </div>
-      <div class="play-btn">Играть →</div>
-    </a>
-
-    <!-- 6. て-форма -->
-    <a href="te_form.html" class="game-card">
-      <div class="game-info">
-        <div class="game-icon">💮</div>
-        <div class="game-text">
-          <h2>て-форма</h2>
-        </div>
-      </div>
-      <div class="play-btn">Играть →</div>
-    </a>
-
-    <!-- 7. Блоки Собес -->
+    <!-- 3. Блоки Собес (Бывшая 7-я) -->
     <a href="blocks_sobes.html" class="game-card">
       <div class="game-info">
         <div class="game-icon">💼</div>
@@ -175,12 +137,67 @@
       <div class="play-btn">Играть →</div>
     </a>
 
-    <!-- 8. Глаголяндия -->
-    <a href="1ур.html" class="game-card">
+    <!-- 4. て-форма (Бывшая 6-я) -->
+    <a href="te_form.html" class="game-card">
       <div class="game-info">
-        <div class="game-icon">🏰</div>
+        <div class="game-icon">💮</div>
         <div class="game-text">
-          <h2>Глаголяндия</h2>
+          <h2>て-форма</h2>
+        </div>
+      </div>
+      <div class="play-btn">Играть →</div>
+    </a>
+
+    <!-- 5. Блоки 1 (Бывшая 5-я) -->
+    <a href="blocks1.html" class="game-card">
+      <div class="game-info">
+        <div class="game-icon">🗳️</div>
+        <div class="game-text">
+          <h2>Блоки 1</h2>
+        </div>
+      </div>
+      <div class="play-btn">Играть →</div>
+    </a>
+
+    <!-- 6. Квиз 2 (Бывшая 4-я) -->
+    <a href="quiz2_with_images.html" class="game-card">
+      <div class="game-info">
+        <div class="game-icon">🌸</div>
+        <div class="game-text">
+          <h2>Квиз 2</h2>
+        </div>
+      </div>
+      <div class="play-btn">Играть →</div>
+    </a>
+
+    <!-- 7. Квиз 1 (Бывшая 3-я) -->
+    <a href="quiz1.html" class="game-card">
+      <div class="game-info">
+        <div class="game-icon">⛩️</div>
+        <div class="game-text">
+          <h2>Квиз 1</h2>
+        </div>
+      </div>
+      <div class="play-btn">Играть →</div>
+    </a>
+
+    <!-- 8. Антонимы хирагана (Бывшая 2-я) -->
+    <a href="antonyms_hiragana.html" class="game-card">
+      <div class="game-info">
+        <div class="game-icon">✍️</div>
+        <div class="game-text">
+          <h2>Антонимы хирагана</h2>
+        </div>
+      </div>
+      <div class="play-btn">Играть →</div>
+    </a>
+
+    <!-- 9. Антонимы (Бывшая 1-я) -->
+    <a href="antonyms.html" class="game-card">
+      <div class="game-info">
+        <div class="game-icon">⚖️</div>
+        <div class="game-text">
+          <h2>Антонимы</h2>
         </div>
       </div>
       <div class="play-btn">Играть →</div>
