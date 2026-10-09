@@ -1,167 +1,6 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Тренажёр Японских Прилагательных (N5)</title>
-
-  <!-- Отступ под кнопки Telegram WebApp -->
-  <style>
-    body {
-      padding-top: calc(80px + env(safe-area-inset-top, 0px)) !important;
-    }
-  </style>
-
-  <style>
-    :root {
-      --bg-page: #f4f1ea;
-      --card-bg: #ffffff;
-      --text-main: #2c2c2a;
-      --text-sub: #6b6a63;
-      --text-muted: #9a988f;
-      --border: #d3d1c7;
-      --border-light: #e5e2d8;
-      --accent: #d97757;
-      --accent-hover: #c46849;
-      
-      --sel-bg: #eeecf0;
-      --sel-border: #7f77dd;
-      --sel-text: #3c3489;
-      
-      --success-bg: #eaf3de;
-      --success-border: #97c459;
-      --success-text: #3b6b19;
-      
-      --error-bg: #fbeae8;
-      --error-border: #a32d2d;
-      --error-text: #a32d2d;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    body {
-      background-color: var(--bg-page);
-      color: var(--text-main);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      padding: 12px;
-    }
-
-    #app {
-      width: 100%;
-      max-width: 480px;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .back-to-menu {
-      display: inline-flex;
-      align-items: center;
-      align-self: flex-start;
-      gap: 6px;
-      text-decoration: none;
-      color: #6b6a63;
-      font-size: 13px;
-      font-weight: 600;
-      padding: 6px 14px;
-      background: #fff;
-      border: 1px solid #d3d1c7;
-      border-radius: 20px;
-      margin-bottom: 2px;
-    }
-
-    /* Навигация по Уровням */
-    .level-nav {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr) 1.2fr;
-      gap: 4px;
-    }
-
-    .lvl-btn {
-      padding: 10px 1px;
-      border-radius: 9px;
-      border: 1px solid var(--border);
-      background: var(--card-bg);
-      color: var(--text-main);
-      font-size: 12px;
-      font-weight: 700;
-      cursor: pointer;
-      text-align: center;
-      transition: all 0.15s ease;
-      white-space: nowrap;
-    }
-
-    .lvl-btn.active {
-      background: var(--text-main);
-      color: #ffffff;
-      border-color: var(--text-main);
-    }
-
-    .lvl-btn.errors-btn {
-      color: var(--error-border);
-      border-color: var(--error-border);
-    }
-    .lvl-btn.errors-btn.active {
-      background: var(--error-border);
-      color: #ffffff;
-    }
-
-    /* Баннер правил */
-    .theory-banner {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 9px 14px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--text-sub);
-      cursor: pointer;
-      transition: background 0.15s ease;
-    }
-    .theory-banner:active {
-      background: var(--border-light);
-    }
-
-    /* Прогресс-бар */
-    .progress-wrap {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-    .progress-labels {
-      display: flex;
-      justify-content: space-between;
-      font-size: 12px;
-      color: var(--text-muted);
-      font-weight: 600;
-    }
-    .progress-container {
-      width: 100%;
-      height: 6px;
-      background: var(--border-light);
-      border-radius: 3px;
-      overflow: hidden;
-    }
-    .progress-bar {
-      height: 100%;
-      width: 0%;
-      background: var(--accent);
-      transition: width 0.2s ease;
-    }
-
-    /* Игровая карточка */
+/* Игровая карточка */
     .card {
+      position: relative;
       background: var(--card-bg);
       border: 1px solid var(--border-light);
       border-radius: 14px;
@@ -173,12 +12,19 @@
       gap: 8px;
     }
 
+    /* Кнопка озвучки, зафиксированная в правом верхнем углу карточки */
+    .btn-sound-corner {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+    }
+
     .target-header {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
       width: 100%;
+      padding: 0 36px; /* Защита от наложения длинного текста на кнопку */
     }
 
     .target-phrase {
@@ -240,8 +86,8 @@
       background: var(--card-bg);
       border: 1px solid var(--border);
       border-radius: 10px;
-      padding: 13px 4px;
-      font-size: 17px;
+      padding: 12px 2px;
+      font-size: clamp(13px, 4vw, 16px);
       font-weight: 700;
       color: var(--text-main);
       cursor: pointer;
@@ -249,6 +95,8 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      text-align: center;
+      word-break: keep-all;
     }
     .choice-btn:active {
       transform: scale(0.97);
@@ -399,9 +247,11 @@
   <!-- 4. Игровая панель -->
   <div id="gamePanel" style="display: flex; flex-direction: column; gap: 8px;">
     <div class="card">
+      <!-- Зафиксированная кнопка озвучки -->
+      <button type="button" class="btn-sound btn-sound-corner" onclick="replayQuestionAudio()" title="Послушать задание">🔊</button>
+      
       <div class="target-header">
         <div class="target-phrase" id="qPhrase">大きい</div>
-        <button type="button" class="btn-sound" onclick="replayQuestionAudio()" title="Послушать задание">🔊</button>
       </div>
       <div class="target-reading" id="qReading">おおきい</div>
       <div class="target-ru" id="qRu">Большой</div>
@@ -492,7 +342,7 @@ var ADJECTIVES_DB = [
     ru_te: ["Холодная И снежная.", "НЕ холодная, а теплая."], ru_adv: "Становиться холоднО." },
 
   { id:9,  k:"冷たい", r:"つめたい", ru_main:"Холодный (на ощупь)", stem:"冷た", stem_r:"つめた", type:"i", nk:"水", nr:"みず",
-    ru_pred: ["Вода холодная.", "Вода НЕ холодная.", "Вода БЫЛА холодной.", "Вода НЕ БЫЛА холодной."],
+    ru_pred: ["Во вода холодная.", "Вода НЕ холодная.", "Вода БЫЛА холодной.", "Вода НЕ БЫЛА холодной."],
     ru_attr: ["Холодная вода.", "НЕ холодная вода.", "Вода, которая БЫЛА холодной.", "Вода, которая НЕ БЫЛА холодной."],
     ru_te: ["Холодная И чистая.", "НЕ холодная, а теплая."], ru_adv: "Становиться холоднОЙ." },
 
@@ -571,7 +421,7 @@ var ADJECTIVES_DB = [
     ru_attr: ["Далекая страна.", "НЕ далекая страна.", "Страна, которая БЫЛА далекой.", "Страна, которая НЕ БЫЛА далекой."],
     ru_te: ["Далекая И большая.", "НЕ далекая, а близкая."], ru_adv: "Становиться далекО." },
 
-  { id:25, k:"速い", r:"はやい", ru_main:"Быстрый", stem:"速", stem_r:"はや", type:"i",   nk:"電車", nr:"でんしゃ",
+  { id:25, k:"速い", r:"はやい", ru_main:"Быстрый", stem:"速", stem_r:"はや", type:"i",   nk:"電車", nr:"деんしゃ",
     ru_pred: ["Поезд быстрый.", "Поезд НЕ быстрый.", "Поезд БЫЛ быстрым.", "Поезд НЕ БЫЛ быстрым."],
     ru_attr: ["Быстрый поезд.", "НЕ быстрый поезд.", "Поезд, который БЫЛ быстрым.", "Поезд, который НЕ БЫЛ быстрым."],
     ru_te: ["Быстрый И удобный.", "НЕ быстрый, а медленный."], ru_adv: "Становиться быстрО." },
@@ -890,18 +740,19 @@ function generateLevelDeck(level) {
         : ["いです", "です", "くないです", "じゃないです", "かったです", "でした", "くなかったです", "じゃなかったです"];
 
       // Форма 0: Наст (+)
+      var ans2_0 = isIi ? "いいです" : (isI ? "いです" : "です");
       deck.push({
         rawId: item.id,
         rawKana: item.r,
-        phrase: item.nk + "は " + item.stem + "＿＿",
-        reading: item.nr + "は " + stemKana + "＿＿",
+        phrase: item.nk + "は " + (isIi ? "" : item.stem) + "＿＿",
+        reading: item.nr + "は " + (isIi ? "" : stemKana) + "＿＿",
         ru: item.ru_pred[0],
-        correct: isI ? "いです" : "です",
+        correct: ans2_0,
         choices: choices1,
-        full: item.nk + "は" + item.k + "です",
-        kana: item.nr + "は" + item.r + "です",
-        rule: isI ? "い-прил.: 〜いです" : "な-прил.: 〜です (без буквы な)",
-        typeTag: isI ? "い-прилагательное" : "な-прилагательное"
+        full: item.nk + "は" + (isIi ? "いいです" : (isI ? item.k + "です" : item.stem + "です")),
+        kana: item.nr + "は" + (isIi ? "いいです" : (isI ? item.r + "です" : stemKana + "です")),
+        rule: isIi ? "Исключение 良い: в наст. вр. утверждении форма いいです" : (isI ? "い-прил.: 〜いです" : "на-прил.: 〜です (без буквы な)"),
+        typeTag: isI ? "い-прилагательное" : "на-прилагательное"
       });
 
       // Форма 1: Наст (-)
@@ -916,7 +767,7 @@ function generateLevelDeck(level) {
         full: item.nk + "は" + (isIi ? "よくないです" : (isI ? item.stem + "くないです" : item.stem + "じゃないです")),
         kana: item.nr + "は" + (isIi ? "よくないです" : (isI ? stemKana + "くないです" : stemKana + "じゃないです")),
         rule: isI ? "い-прил. отрицание: 〜くないです (いい → よくないです)" : "на-прил. отрицание: 〜じゃないです",
-        typeTag: isI ? "い-прилагательное" : "な-прилагательное"
+        typeTag: isI ? "い-прилагательное" : "на-прилагательное"
       });
 
       // Форма 2: Прош (+)
@@ -931,7 +782,7 @@ function generateLevelDeck(level) {
         full: item.nk + "は" + (isIi ? "よかったです" : (isI ? item.stem + "かったです" : item.stem + "でした")),
         kana: item.nr + "は" + (isIi ? "よかったです" : (isI ? stemKana + "かったです" : stemKana + "でした")),
         rule: isI ? "い-прил. прошлое: 〜かったです (いい → よかったです)" : "на-прил. прошлое: 〜でした",
-        typeTag: isI ? "い-прилагательное" : "な-прилагательное"
+        typeTag: isI ? "い-прилагательное" : "на-прилагательное"
       });
 
       // Форма 3: Прош (-)
@@ -958,18 +809,23 @@ function generateLevelDeck(level) {
         ? ["いい", "な", "よくない", "じゃない", "よかった", "だった", "よくなかった", "じゃなかった"]
         : ["い", "な", "くない", "じゃない", "かった", "だった", "くなかった", "じゃなかった"];
 
+      var specialNote = (item.k === "多い" || item.k === "少ない") 
+        ? " (⚠️ Внимание: в живой речи перед сущ. чаще говорят 多くの / 少しの)" 
+        : "";
+
       // Форма 0: Наст (+)
+      var ans3_0 = isIi ? "いい" : (isI ? "い" : "な");
       deck.push({
         rawId: item.id,
         rawKana: item.r,
-        phrase: item.stem + "＿＿ " + item.nk,
-        reading: stemKana + "＿＿ " + item.nr,
+        phrase: (isIi ? "" : item.stem) + "＿＿ " + item.nk,
+        reading: (isIi ? "" : stemKana) + "＿＿ " + item.nr,
         ru: item.ru_attr[0],
-        correct: isI ? "い" : "な",
+        correct: ans3_0,
         choices: choices2,
-        full: item.k + item.nk,
-        kana: item.r + item.nr,
-        rule: isI ? "い-прил. перед сущ.: 〜い + N" : "на-прил. перед сущ.: 〜な + N",
+        full: (isIi ? "いい" : (isI ? item.k : item.stem + "な")) + item.nk,
+        kana: (isIi ? "いい" : (isI ? item.r : stemKana + "な")) + item.nr,
+        rule: (isIi ? "Исключение 良い перед сущ.: いい + N" : (isI ? "い-прил. перед сущ.: 〜い + N" : "на-прил. перед сущ.: 〜な + N")) + specialNote,
         typeTag: isI ? "い-прилагательное" : "на-прилагательное"
       });
 
@@ -1312,7 +1168,7 @@ function openTheory() {
       <p>• Отрицательное: <code>〜くなくて</code></p>
       <p><em>*Исключение 良い (いい): よくて, よくなくて</em></p>
       <br>
-      <p><strong>на-прилагательные:</strong></p>
+      <p><strong>な-прилагательные:</strong></p>
       <p>• Утвердительное: <code>〜で</code></p>
       <p>• Отрицательное: <code>〜じゃなくて</code></p>
     `;
